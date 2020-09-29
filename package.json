@@ -1,0 +1,12 @@
+{
+  "name": "on_the_fence",
+  "version": "1.0.0",
+  "description": "An application to help you make decisions.",
+  "main": "index.js",
+  "author": "Miguel Rivas Perez <mrivasperez1996@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1"
+  }
+}
