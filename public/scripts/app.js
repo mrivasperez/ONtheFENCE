@@ -27,7 +27,7 @@ var IndecisionApp = function (_React$Component) {
   _createClass(IndecisionApp, [{
     key: "render",
     value: function render() {
-      var title = 'OFF the FENCE';
+      var title = "OFF the FENCE";
       var subtitle = "Get off the fence and cut to the chase!";
       var options = [1, 2, 3, 5];
 
@@ -77,8 +77,6 @@ var Header = function (_React$Component2) {
   return Header;
 }(React.Component);
 
-;
-
 var Action = function (_React$Component3) {
   _inherits(Action, _React$Component3);
 
@@ -91,7 +89,7 @@ var Action = function (_React$Component3) {
   _createClass(Action, [{
     key: "optionHandler",
     value: function optionHandler() {
-      alert('Not workin yet... here is an options tho:');
+      alert("Not workin yet... here is an options tho:");
     }
   }, {
     key: "render",
@@ -111,12 +109,11 @@ var Action = function (_React$Component3) {
   return Action;
 }(React.Component);
 
-;
-
 // set up and options prop for Options component
 // Inside options render the lenght of the array!
 
 // Options class -> static text
+
 
 var Options = function (_React$Component4) {
   _inherits(Options, _React$Component4);
@@ -134,14 +131,14 @@ var Options = function (_React$Component4) {
     key: "removeAllHandler",
     value: function removeAllHandler() {
       var options = this.props.options;
-      alert('Removed all clicked!');
+      alert("Removed all clicked!");
       console.log(options);
     }
   }, {
     key: "render",
     value: function render() {
       var options = this.props.options;
-      console.log(options, 'console');
+      console.log(options, "console");
       return React.createElement(
         "div",
         null,
@@ -208,10 +205,10 @@ var AddOption = function (_React$Component6) {
 
       if (option) {
         alert(option);
-        return e.target.elements.option.value = '';
+        return e.target.elements.option.value = "";
       }
 
-      return e.target.elements.option.value = '';
+      return e.target.elements.option.value = "";
     }
   }, {
     key: "render",
@@ -236,4 +233,4 @@ var AddOption = function (_React$Component6) {
   return AddOption;
 }(React.Component);
 
-ReactDOM.render(React.createElement(IndecisionApp, null), document.getElementById('app'));
+ReactDOM.render(React.createElement(IndecisionApp, null), document.getElementById("app"));
