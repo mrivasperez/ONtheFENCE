@@ -8,35 +8,48 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var obj = {
-  name: "Vikram",
-  getName: function getName() {
-    console.log(this.name);
-  }
-};
-
 var IndecisionApp = function (_React$Component) {
   _inherits(IndecisionApp, _React$Component);
 
-  function IndecisionApp() {
+  function IndecisionApp(props) {
     _classCallCheck(this, IndecisionApp);
 
-    return _possibleConstructorReturn(this, (IndecisionApp.__proto__ || Object.getPrototypeOf(IndecisionApp)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (IndecisionApp.__proto__ || Object.getPrototypeOf(IndecisionApp)).call(this, props));
+
+    _this.handleDeleteOptions = _this.handleDeleteOptions.bind(_this);
+    _this.state = {
+      options: [1, 2, 3, 5, 6]
+    };
+    return _this;
   }
 
+  // handle delete options
+
+
   _createClass(IndecisionApp, [{
+    key: "handleDeleteOptions",
+    value: function handleDeleteOptions() {
+      this.setState(function () {
+        return {
+          options: []
+        };
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var title = "OFF the FENCE";
       var subtitle = "Get off the fence and cut to the chase!";
-      var options = [1, 2, 3, 5];
 
       return React.createElement(
         "div",
         null,
         React.createElement(Header, { title: title, subtitle: subtitle }),
-        React.createElement(Action, null),
-        React.createElement(Options, { options: options }),
+        React.createElement(Action, { hasOptions: this.state.options.length > 0 }),
+        React.createElement(Options, {
+          options: this.state.options,
+          handleDeleteOptions: this.handleDeleteOptions
+        }),
         React.createElement(AddOption, null)
       );
     }
@@ -99,7 +112,7 @@ var Action = function (_React$Component3) {
         null,
         React.createElement(
           "button",
-          { onClick: this.optionHandler },
+          { onClick: this.optionHandler, disabled: !this.props.hasOptions },
           "Pick an option"
         )
       );
@@ -118,23 +131,13 @@ var Action = function (_React$Component3) {
 var Options = function (_React$Component4) {
   _inherits(Options, _React$Component4);
 
-  function Options(props) {
+  function Options() {
     _classCallCheck(this, Options);
 
-    var _this4 = _possibleConstructorReturn(this, (Options.__proto__ || Object.getPrototypeOf(Options)).call(this, props));
-
-    _this4.removeAllHandler = _this4.removeAllHandler.bind(_this4);
-    return _this4;
+    return _possibleConstructorReturn(this, (Options.__proto__ || Object.getPrototypeOf(Options)).apply(this, arguments));
   }
 
   _createClass(Options, [{
-    key: "removeAllHandler",
-    value: function removeAllHandler() {
-      var options = this.props.options;
-      alert("Removed all clicked!");
-      console.log(options);
-    }
-  }, {
     key: "render",
     value: function render() {
       var options = this.props.options;
@@ -153,7 +156,7 @@ var Options = function (_React$Component4) {
         }),
         React.createElement(
           "button",
-          { onClick: this.removeAllHandler },
+          { onClick: this.props.handleDeleteOptions },
           "Remove all"
         )
       );
