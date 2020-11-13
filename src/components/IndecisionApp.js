@@ -4,18 +4,15 @@ import AddOption from "./AddOption";
 import Options from "./Options";
 import Action from "./Action";
 import Header from "./Header";
+import OptionModal from "./OptionModal";
+
+// convert to using class syntax
 
 export default class IndecisionApp extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleDeleteOptions = this.handleDeleteOptions.bind(this);
-    this.handlePick = this.handlePick.bind(this);
-    this.handleAddOption = this.handleAddOption.bind(this);
-    this.handleDeleteOption = this.handleDeleteOption.bind(this);
-    this.state = {
-      options: [],
-    };
-  }
+  state = {
+    options: [],
+    selectedOption: undefined,
+  };
 
   // mount options in locat storage when loaded
   componentDidMount() {
@@ -40,9 +37,9 @@ export default class IndecisionApp extends React.Component {
   }
 
   // handle delete options
-  handleDeleteOptions() {
+  handleDeleteOptions = () => {
     this.setState(() => ({ options: [] }));
-  }
+  };
 
   handleDeleteOption(optionToRemove) {
     this.setState(prevState => ({
@@ -54,13 +51,15 @@ export default class IndecisionApp extends React.Component {
 
   // handlePick - pass down to action and setup onClick - bind here
   //randomly pick an option and alert it
-  handlePick() {
+  handlePick = () => {
     let options = this.state.options;
     let option = options[Math.floor(Math.random() * options.length)];
-    alert(`This is your option: ${option}`);
-  }
-
-  handleAddOption(option) {
+    this.setState({ selectedOption: option });
+  };
+  clearSelectedOption = () => {
+    this.setState({ selectedOption: undefined });
+  };
+  handleAddOption = option => {
     if (!option) {
       return "Enter valid value to add item";
     } else if (this.state.options.indexOf(option) > -1) {
@@ -72,7 +71,7 @@ export default class IndecisionApp extends React.Component {
         options: prevState.options.concat(option),
       };
     });
-  }
+  };
 
   render() {
     const title = "OFF the FENCE";
@@ -91,6 +90,10 @@ export default class IndecisionApp extends React.Component {
           handleDeleteOption={this.handleDeleteOption}
         />
         <AddOption handleAddOption={this.handleAddOption} />
+        <OptionModal
+          selectedOption={this.state.selectedOption}
+          clearSelectedOption={this.clearSelectedOption}
+        />
       </div>
     );
   }
