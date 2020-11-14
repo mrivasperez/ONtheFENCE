@@ -1,17 +1,21 @@
 import React from "react";
 
 export const Option = props => (
-  <li>
-    {props.option}
+  <div className="option">
+    <p className="option__text">
+      {props.count}. {props.option}
+    </p>
     <button
+      className="button button--link"
       onClick={e => {
         e.preventDefault();
+        console.log("blick");
         props.handleDeleteOption(props.option);
       }}
     >
       Remove
     </button>
-  </li>
+  </div>
 );
 
 export default Option;

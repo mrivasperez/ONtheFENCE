@@ -41,13 +41,11 @@ export default class IndecisionApp extends React.Component {
     this.setState(() => ({ options: [] }));
   };
 
-  handleDeleteOption(optionToRemove) {
+  handleDeleteOption = optionToRemove => {
     this.setState(prevState => ({
-      options: prevState.options.filter(option => {
-        return optionToRemove !== option;
-      }),
+      options: prevState.options.filter(option => optionToRemove !== option),
     }));
-  }
+  };
 
   // handlePick - pass down to action and setup onClick - bind here
   //randomly pick an option and alert it
@@ -75,21 +73,26 @@ export default class IndecisionApp extends React.Component {
 
   render() {
     const title = "OFF the FENCE";
-    const subtitle = "Get off the fence and cut to the chase!";
+    const subtitle = "Cut to the chase!";
 
     return (
       <div>
         <Header title={title} subtitle={subtitle} />
-        <Action
-          hasOptions={this.state.options.length > 0}
-          handlePick={this.handlePick}
-        />
-        <Options
-          options={this.state.options}
-          handleDeleteOptions={this.handleDeleteOptions}
-          handleDeleteOption={this.handleDeleteOption}
-        />
-        <AddOption handleAddOption={this.handleAddOption} />
+        <div className="container">
+          <Action
+            hasOptions={this.state.options.length > 0}
+            handlePick={this.handlePick}
+          />
+          <div className="widget">
+            <Options
+              options={this.state.options}
+              handleDeleteOptions={this.handleDeleteOptions}
+              handleDeleteOption={this.handleDeleteOption}
+            />
+            <AddOption handleAddOption={this.handleAddOption} />
+          </div>
+        </div>
+
         <OptionModal
           selectedOption={this.state.selectedOption}
           clearSelectedOption={this.clearSelectedOption}
